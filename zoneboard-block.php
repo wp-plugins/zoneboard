@@ -16,6 +16,17 @@ class ZoneboardBlock {
 		if ( $this->icon ) {
 			$this->icon = new ZoneboardBlockIcon( $this->icon );
 		}
+		$this->handle_callbacks();
+	}
+
+	function handle_callbacks() {
+		if (isset($this->callback) && is_string($this->callback)) {
+			if (strstr($this->callback, '::')) {
+				$funcs = explode('::', $this->callback);
+				$class = $funcs[0];
+				$this->callback = array('StoreyImport', 'render_dashboard_widget');
+			}
+		}
 	}
 
 	function import( $info ) {
@@ -31,16 +42,6 @@ class ZoneboardBlock {
 		}
 	}
 
-	function add_link( $label, $url ) {
-		if ( !$this->links ) {
-			$this->links = array();
-		}
-		$this->links[] = array( 'label' => $label, 'link' => $url );
-	}
-
-	function set_icon( $icon_name ) {
-
-	}
 }
 
 class ZoneboardBlockIcon {

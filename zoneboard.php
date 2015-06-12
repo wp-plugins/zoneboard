@@ -3,7 +3,7 @@
 	Plugin Name: Zoneboard
 	Plugin URI: http://upstatement.com/zoneboard
 	Description: Cleans up the WordPress Dashboard
-	Version: 0.4
+	Version: 0.5
 	Author: Upstatement
 	*/
 
@@ -92,6 +92,10 @@
 			if ( isset($this->json_data->message )) {
 				$data['message'] = $this->json_data->message;
 			}
+			$data['logo_url'] = "https://raw.githubusercontent.com/jonsherrard/zoneboard/master/logo.png";
+			if ( isset($this->json_data->logo_url )) {
+				$data['logo_url'] = $this->json_data->logo_url;
+			}
 			$data['stylesheet'] = plugins_url('css/zoneboard.css', __FILE__);
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
@@ -124,3 +128,7 @@
 	// add_action('admin_init', function(){
 		$zoneboard = new Zoneboard( get_stylesheet_directory().'/zoneboard.json' );
 	// });
+	//
+	function zoneboard_hello_world() {
+		echo "Zoneboard Hello World!";
+	}

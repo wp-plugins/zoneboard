@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='{{stylesheet}}' type='text/css' media='all' />
 	<div class="logo-banner">
-		<img src="/wp-content/plugins/zoneboard/logo.png" />
+		<img src="{{logo_url}}" />
 	</div>
 <div class="wrap">
 	<h2>{{site.name}} Zoneboard</h2>
@@ -18,6 +18,9 @@
 
 			   <div class="panel-headline"> {{brick.label}}</div>
 				<div class="inpanel-links" >
+					{% if brick.callback %}
+						{{function(brick.callback)}}
+					{% endif %}
 					<ul>
 						{% for link in brick.links %}
 							{% if '{{' in link.url %}
